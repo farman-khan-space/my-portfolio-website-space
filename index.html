@@ -374,13 +374,22 @@
                 justify-content: center;
             }
         }
+        #logo-head{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
     </style>
 </head>
 <body>
 
     <header class="main-header" id="main-header">
         <div class="container nav-container">
+            <div id="logo-head">
+            <img id="logo" src="light.svg" alt="">
             <a href="#" class="logo">datamakingsense.space</a>
+            </div>
             <div class="nav-right">
                 <nav class="main-nav" id="main-nav">
                     <ul>
@@ -489,13 +498,15 @@
     </footer>
 
     <script>
+        const logo = document.querySelector("#logo")
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
             const mainNav = document.getElementById('main-nav');
             const header = document.getElementById('main-header');
             const themeToggle = document.getElementById('theme-toggle');
             const htmlEl = document.documentElement;
-
+            // currentTheme = "light";
+            // logo.src = "light.svg"
             // --- Mobile Navigation Toggle ---
             menuToggle.addEventListener('click', () => {
                 mainNav.classList.toggle('active');
@@ -529,16 +540,16 @@
             themeToggle.addEventListener('click', () => {
                 const currentTheme = htmlEl.getAttribute('data-theme');
                 setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                if (currentTheme === 'dark') {
+                    logo.src = "light.svg";
+                }else{
+                    logo.src = "dark.svg"
+                }
             });
 
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // const savedTheme = localStorage.getItem('theme');
+            // const prefersDark = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else if (prefersDark) {
-                setTheme('dark');
-            }
         });
     </script>
 
